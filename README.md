@@ -27,7 +27,7 @@ cat ~/.aws/credentials
 aws configure list
 ```
 
-### 2. Iniciar a configuração do terraform
+## 2. Iniciar a configuração do terraform
 
 2.1 Instalando o terraform no ubuntu WSL, conforme doc: https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli
 ``` bash
@@ -46,52 +46,50 @@ on linux_amd64
 ```
 
 2.3 Iniciando a configuração do terraform
-
-Esse comando `terraform init` inicializa o diretório do Terraform, baixa todos os plug-ins ou módulos necessários mencionados em sua configuração e prepara o ambiente para trabalhar com o Terraform.
+ - Esse comando `terraform init` inicializa o diretório do Terraform, baixa todos os plug-ins ou módulos necessários mencionados em sua configuração e prepara o ambiente para trabalhar com o Terraform.
 ``` bash
 terraform init
 ```
 
 2.4 Planejando as alterações
-
-O `terraform plan` serve para visualização das mudanças que o Terraform fará em sua infraestrutura. 
+ - O `terraform plan` serve para visualização das mudanças que o Terraform fará em sua infraestrutura. 
 Ele compara o estado atual da infraestrutura com o estado desejado definido nos arquivos de configuração do Terraform e mostra as ações específicas que o Terraform tomará para preencher a lacuna.
 ``` bash
 terraform plan
 ```
 
 2.5 Salve a saída do plan
-
-Se quiser salvar o plano para referência futura ou compartilhá-lo com os membros da equipe, você pode usar o sinalizador -out com o comando plan.
+ - Se quiser salvar o plano para referência futura ou compartilhá-lo com os membros da equipe, você pode usar o sinalizador -out com o comando plan.
 Por exemplo, o seguinte comando salva o plano em um arquivo chamado plan.tfplan.
 ``` bash
 terraform plan -out=plan.tfplan
 ```
 
 2.6 Aplicando as alterações
-Executa a “criação” dos recursos (instâncias/objetos) no provider indicado nos arquivos TF;
+ - Executa a “criação” dos recursos (instâncias/objetos) no provider indicado nos arquivos TF;
 ``` bash
 terraform apply -auto-approve
 ```
 
 2.7 Destruindo o ambiente
-Executa a “remoção” dos recursos (instâncias/objetos) no provider indicado nos arquivos TF.
-(Seria interesante usar o 'terraform plan -destroy' antes.)
+ - Executa a “remoção” dos recursos (instâncias/objetos) no provider indicado nos arquivos TF.
+ - (Seria interesante usar o 'terraform plan -destroy' antes.)
 ``` bash
 terraform destroy
 ```
 
-# Anotações:
+## Anotações: 💻
 
 Sobre o arquivo terraform.tfstate
 
-Este é o arquivo de estado de modificações, onde sempre está sincronizado com as modificações aplicadas.
-Muito importante para se utilizar com muitas pessoas, pois quando alguém precisa adicionar/atualizar ou remover algo,
-antes de qualquer operação, o Terraform faz uma atualização para atualizar o estado com a infraestrutura real.
+ - Este é o arquivo de estado de modificações, onde sempre está sincronizado com as modificações aplicadas.
+ - Muito importante para se utilizar com muitas pessoas, pois quando alguém precisa adicionar/atualizar ou remover algo,
+ - antes de qualquer operação, o Terraform faz uma atualização para atualizar o estado com a infraestrutura real.
 
-# Pode ser definido no arquivo root (0-provider.tf)
+ - Pode ser definido no arquivo root (0-provider.tf)
+ - Existe a possibilidade de salvar o arquivo de estado ".tfstate" direto no S3
 
-# Exemplo usando o S3 para salvar o arquivo de estado ".tfstate"
+#### Exemplo de como salvar o tfstate em um bucket no S3
 ```
 terraform {
   backend "s3" {
