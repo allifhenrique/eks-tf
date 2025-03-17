@@ -1,0 +1,44 @@
+name: Terraform AWS Deployment EKS and Config - FIAP
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  terraform:
+    name: Terraform Apply
+    runs-on: ubuntu-latest
+
+    steps:
+      # Passo 1: Checkout do código
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Passo 2: Configurar o Terraform
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.5.0
+
+      # Passo 3: Inicializar o Terraform
+      - name: Terraform Init
+        run: terraform init
+
+      # Passo 4: Validar o código Terraform
+      - name: Terraform Validate
+        run: terraform validate
+
+      # Passo 5: Criar o plano Terraform
+      - name: Terraform Plan
+        env:          
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: terraform plan -out=tfplan
+
+      # Passo 6: Aplicar o plano Terraform
+      - name: Terraform Apply
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: terraform apply -auto-approve tfplan
