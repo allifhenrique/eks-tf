@@ -16,13 +16,20 @@ variable "aws_region" {
 variable "aws_profile" {
   description = "profile utilizado no deploy"
   type        = string
-  default     = "gvenunes"
+  default     = "giovane-urbanfood"
 }
 
 variable "cluster_name" {
   description = "Nome do cluster EKS"
   type        = string
   default     = "eks-urbanfood"
+}
+
+
+variable "namespace" {
+  description = "Nome do namespace"
+  type        = string
+  default     = "urban-food"
 }
 
 variable "instance_type" {
