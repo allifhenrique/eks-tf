@@ -16,7 +16,7 @@ variable "aws_region" {
 variable "aws_profile" {
   description = "profile utilizado no deploy"
   type        = string
-  default     = "giovane-urbanfood"
+  default     = "terraform-iac"
 }
 
 variable "cluster_name" {
