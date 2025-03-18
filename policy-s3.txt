@@ -1,0 +1,27 @@
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AddPublicReadCannedAcl",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": [
+                    "arn:aws:iam::857378965163:user/giovane",
+                    "arn:aws:iam::857378965163:user/henrrique",
+                    "arn:aws:iam::857378965163:user/terraform-iac"
+                ]
+            },
+            "Action": [
+                "s3:GetObject",
+                "s3:ListBucket",
+                "s3:PutObject",
+                "s3:PutObjectAcl"
+            ],
+            "Resource": [
+                "arn:aws:s3:::iac-urbanfood-tfstates/*",
+                "arn:aws:s3:::iac-urbanfood-tfstates"
+            ]
+        }
+    ]
+}
