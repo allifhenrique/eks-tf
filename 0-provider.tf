@@ -9,8 +9,8 @@ terraform {
 }
 
 provider "aws" {
-  region = var.aws_region
-  #profile = var.aws_profile
+  region = "us-east-1"
+  #profile = "terraform-iac"
 }
 
 terraform {
@@ -19,6 +19,8 @@ terraform {
     key    = "terraform.tfstate"
     region = "us-east-1"
     #profile = "terraform-iac"
+    assume_role = {
+      role_arn = "arn:aws:iam::857378965163:role/role-terraform-save-tfstates" 
+    }    
   }
 }
-
